@@ -1,1 +1,1 @@
-### END 2 END Agentic AI projec
+### END 2 END Agentic AI project
