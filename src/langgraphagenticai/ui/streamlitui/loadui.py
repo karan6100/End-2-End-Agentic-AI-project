@@ -50,9 +50,7 @@ class LoadStreamlitUI:
         st.session_state.timeframe = ''
         st.session_state.IsFetchButtonClicked = False
         st.session_state.IsSDLC = False
-
-
-        
+       
 
         with st.sidebar:
             # Getting options from config

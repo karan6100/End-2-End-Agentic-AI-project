@@ -21,6 +21,7 @@ class GroqLLM:
             llm = ChatGroq(api_key = groq_api_key, model = selected_groq_model)
 
         except Exception as e:
+            print(e)
             raise ValueError(f"Error Occured within Exception: {e}")
         
         return llm
