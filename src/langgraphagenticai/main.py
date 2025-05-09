@@ -2,6 +2,7 @@ import streamlit as st
 import json
 from  src.langgraphagenticai.ui.streamlitui.loadui import LoadStreamlitUI
 from src.langgraphagenticai.LLMs.groqllm import GroqLLM
+from src.langgraphagenticai.LLMs.openaillm import OpenAILLM
 from src.langgraphagenticai.graph.graph_builder import GraphBuilder
 from src.langgraphagenticai.ui.streamlitui.display_result import DisplayResultStreamlit
 
@@ -19,19 +20,29 @@ def load_langgraph_agenticai_app():
 
     if not user_input:
         st.error("Error: Failed to load user input from UI.")
+    else:
+        selected_llm = user_input["selected_llm"]
 
 
     # Text input for user message
     if st.session_state.IsFetchButtonClicked:
         user_message = st.session_state.timeframe 
+
     else :
         user_message = st.chat_input("Enter your message:")
 
     if user_message:
         try:
+
             # configure LLM
-            obj_llm_config = GroqLLM(user_controls_input= user_input)
-            model = obj_llm_config.get_llm_model()
+            if selected_llm == "Groq":
+                obj_llm_config = GroqLLM(user_controls_input= user_input)
+                model = obj_llm_config.get_llm_model()
+
+            if selected_llm == 'OpenAI':
+                obj_llm_config = OpenAILLM(user_controls_input= user_input)
+                model = obj_llm_config.get_llm_model()
+
 
             if not model:
                 st.error("Error: LLM could not be initialized.")
